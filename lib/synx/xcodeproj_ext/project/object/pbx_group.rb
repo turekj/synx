@@ -122,7 +122,9 @@ module Xcodeproj
             destination.mkpath
             file_utils.mv(file_pathname.realpath, destination)
             if is_file_to_prune
-              Synx::Tabber.puts "#{file_pathname.basename} (source/image file that is not referenced by the Xcode project)".yellow
+              issue = "#{file_pathname.basename} (source/image file that is not referenced by the Xcode project)"
+              project.sync_issues_repository.add_issue(issue, file_pathname.basename, :unused)              
+              Synx::Tabber.puts issue.yellow
             else
               Synx::Tabber.puts file_pathname.basename
             end
