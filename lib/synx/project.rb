@@ -151,9 +151,9 @@ module Synx
 
     def exit_code
       if warn_type.to_s == 'error' and sync_issues_repository.issues_count > 0
-        -1
+        false
       else
-        0
+        true
       end
     end
   end
